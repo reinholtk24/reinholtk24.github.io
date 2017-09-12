@@ -6873,8 +6873,8 @@ button.close {
 	padding-top: 15px;
 }
 
-.info > h4 {
-	color: #EEFFFF;
+.info > h2 {
+	color: #ffffff;
 }
 
 .info > a {
@@ -6892,7 +6892,7 @@ button.close {
 }
 
 .foooter {
-	position: absolute;
+  position: relative;
   bottom: 10;
   width: 100%;
   /* Set the fixed height of the footer here */
