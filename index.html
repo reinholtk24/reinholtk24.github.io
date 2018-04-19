@@ -33,7 +33,7 @@ $('#submit-btn').on('click', function(e) {
     e.preventDefault();
     if( $('#name').val() ){
         $.ajax({
-            url     : 'savejson.php',
+            url     : 'test_excel_browser.php',
             method  : 'post',
             data    : { 'name': $('#name').val() },
             success : function( response ) {
