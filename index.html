@@ -33,7 +33,7 @@ $('#submit-btn').on('click', function(e) {
     e.preventDefault();
     if( $('#name').val() ){
         $.ajax({
-            url     : 'test_excel_browser.php',
+            url     : 'savejson.php',
             method  : 'post',
             data    : { 'name': $('#name').val() },
             success : function( response ) {
@@ -53,6 +53,9 @@ $('#submit-btn').on('click', function(e) {
 <form>
     <input type="text" id="name" name="name">
     <button type="submit" id="submit-btn">
+</form>
+<form action="test_excel_browser.php" method="get">
+  <input type="submit" value="Run me now!">
 </form>
 
 <script>
