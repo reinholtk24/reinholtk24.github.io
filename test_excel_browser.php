@@ -19,4 +19,3 @@ foreach($data as $row) {
 	$excel->addRow($row);
 }
 $excel->finalize();
-?> 
