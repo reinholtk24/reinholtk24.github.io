@@ -33,8 +33,8 @@ function myFunction() {
 		fs.writeFile('myjsonfile.json', json, 'utf8', callback);
 	}
 	//document.getElementById("demo").innerHTML = anno.getAnnotations(); 
-	//anno.addHandler('onAnnotationCreated', function(annotation) {
-    //console.log(annotation.text);
+	anno.addHandler('onAnnotationCreated', function(annotation) {
+    console.log(annotation.text);
 
 });
 }
@@ -61,7 +61,7 @@ $('#submit-btn').on('click', function(e) {
 <body> 
 <p>Define a region or two and press the button to view the data that will be collected.</p>
 <br>
-<img id='imgOne' src="barnyardScaled.jpg" style="width: 600px; height: 600px"class="annotatable" />
+<img id='imgOne' src="barnyardScaled.jpg" style="width: 600px; height: 600px" class="annotatable" />
 <!--img id='imgOne' src="daliScaled.jpg" class="annotatable" />
 <img id='imgOne' src="runawayScaled.jpg" class="annotatable" />
 <img id='imgOne' src="nighthawksScaled.jpg" class="annotatable" />
