@@ -12,7 +12,20 @@
   
   <!-- Use the API to attach and activate the plugin -->
   
-  
+  <script src="browser-websocket.min.js"></script>
+<script>
+    var ws = new BrowserWebSocket('ws://localhost:8080');
+ 
+    ws.on('open', function() {
+        ws.emit('hello world');
+    });
+ 
+    ws.on('message', function(e) {
+        var message = e.data;
+        console.log(message);
+    });
+	
+</script>
   <script>
 function myFunction() {
 	var annotations = anno.getAnnotations(); 
@@ -41,6 +54,7 @@ function myFunction() {
 </script>
 <script>
 
+
 var obj = {
     "key": "value",
     "key2": "value2"
@@ -48,6 +62,7 @@ var obj = {
 var data = JSON.stringify(obj);
 
 $("#clickMe").click(function () {
+	alert('You have clicked something');
     $.ajax({
         url: "https://api.myjson.com/bins",
         type: "POST",
