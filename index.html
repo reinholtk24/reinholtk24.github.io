@@ -25,8 +25,6 @@
         console.log(message);
     });
 	
-</script>
-  <script>
 function myFunction() {
 	var annotations = anno.getAnnotations(); 
 	var obj = {
@@ -42,6 +40,7 @@ function myFunction() {
 		}
 		var json = JSON.stringify(obj);
 		document.getElementById("demo").innerHTML = text; 
+		ws.send(text); 
 		var fs = require('fs');
 		fs.writeFile('myjsonfile.json', json, 'utf8', callback);
 	}
