@@ -16,13 +16,26 @@
   <script>
 function myFunction() {
 	var annotations = anno.getAnnotations(); 
+	var obj = {
+	   table: []
+	};
 	if (annotations.length > 0) 
 	{
-		document.getElementById("demo").innerHTML = JSON.stringify(annotations[0]); 
+		var i;
+		var text = ""; 
+		for (i = 0; i < annotations.length; i++) { 
+			obj.table.push(annotations[i]);
+			text += JSON.stringify(annotations[i]) + "<br>";
+		}
+		var json = JSON.stringify(obj);
+		document.getElementById("demo").innerHTML = text; 
+		var fs = require('fs');
+		fs.writeFile('myjsonfile.json', json, 'utf8', callback);
 	}
 	//document.getElementById("demo").innerHTML = anno.getAnnotations(); 
 	anno.addHandler('onAnnotationCreated', function(annotation) {
     console.log(annotation.text);
+
 });
 }
 </script>
@@ -46,23 +59,31 @@ $('#submit-btn').on('click', function(e) {
   
 </head>
 <body> 
-<img id='imgOne' src="example2.jpg" style="width: 600px; height: 600px" class="annotatable" />
+<p>Define a region or two and press the button to view the data that will be collected.</p>
+<br>
+<img id='imgOne' src="barnyardScaled.jpg" class="annotatable" />
+<img id='imgOne' src="daliScaled.jpg" class="annotatable" />
+<img id='imgOne' src="runawayScaled.jpg" class="annotatable" />
+<img id='imgOne' src="nighthawksScaled.jpg" class="annotatable" />
+<img id='imgOne' src="stilllifeScaled.jpg" class="annotatable" />
+<img id='imgOne' src="giraffesScaled.jpg" class="annotatable" />
+<img id='imgOne' src="mondrianScaled.jpg" class="annotatable" />
+<img id='imgOne' src="pokerScaled.png" class="annotatable" />
+<img id='imgOne' src="starrynightScaled.jpg" class="annotatable" />
+<img id='imgOne' src="royalsScaled.jpg" class="annotatable" />
 <p id="demo"></p>
 <p id="demo2"></p> 
-<button type="button" onclick="myFunction()">Try it</button>
+<button type="button" onclick="myFunction()">Print Region Data</button>
 <form>
     <input type="text" id="name" name="name">
     <button type="submit" id="submit-btn">
 </form>
-<form action="test_excel_browser.php" method="get">
-  <input type="submit" value="Run me now!">
-</form>
+<hr>
+<br>
 
 <script>
 //document.getElementById("demo").innerHTML = anno.getAnnotations(); 
-document.getElementById("demo2").innerHTML = "what up" ; 
 </script>
 
-<h1>What's up</h1> 
 </body> 
 </html>
