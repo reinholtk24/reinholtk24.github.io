@@ -1,5 +1,5 @@
 /* make all buttons 20 by 20 pixels with white text and green background and a 10 pixel margin */
-button { width: 100px; height: 20px; background: grey; color: white; margin: 10px; }
+button { width: 100px; height: 20px; background: grey; color: white; margin: 5px; }
 
 /* make all tags with the "cool" class name have blue text */
 .cool { color: blue; }

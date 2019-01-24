@@ -2,6 +2,8 @@
 <head>
 	<title>GUI Input Interaction</title>
 	<link rel="stylesheet" href="phone.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 </head>
 <body>
 	<div id="tab_bar">
@@ -11,16 +13,71 @@
 	</div>
 	<div id="content">
 		<div id="content_dialer">
-			<p>hello1</p>
+			<table> 
+			<tr>
+			  <td>
+				<input style="width:300px;" id="inputDialer"></input>		  
+			  </td>
+			  <td></td>
+			  <td></td>
+			</tr>
+			<tr>
+				<td><button class="dialer" id="1">1</button></td>
+				<td><button class="dialer" id="2">2</button></td>
+				<td><button class="dialer" id="3">3</button></td>
+			</tr>
+			<tr>
+				<td><button class="dialer" id="4">4</button></td>
+				<td><button class="dialer" id="5">5</button></td>
+				<td><button class="dialer" id="6">6</button></td>
+			</tr>
+			<tr>
+				<td><button class="dialer" id="7">7</button></td>
+				<td><button class="dialer" id="8">8</button></td>
+				<td><button class="dialer" id="9">9</button></td>
+			</tr>
+			<tr>
+				<td><button class="dialer" id="star">*</button></td>
+				<td><button class="dialer">Call</button></td>
+				<td><button class="dialer" id="pound">#</button></td>
+			</tr>
+			</table>
 		</div>
 		<div id="content_list">
-			<p>hello2</p>
+			<table> 
+			<tr>
+				<td><button class="contact">Joe</button></td>
+				<td><button class="contact">Bob</button></td>
+				<td><button class="contact">Bill</button></td>
+			</tr>
+			<tr>
+				<td><button class="contact">Jim</button></td>
+				<td><button class="contact">Dude</button></td>
+				<td><button class="contact">Chick</button></td>
+			</tr>
+			<tr>
+				<td><button class="contact">They</button></td>
+				<td><button class="contact">I</button></td>
+				<td><button class="contact">Lola</button></td>
+			</tr>
+			</table>
 		</div>
 		<div id="content_add">
-			<p>hello3</p>
+			<form>
+			  <label for="name">Name</label>
+			  <input id="name" placeholder="Jane Smith">
+			  <br>
+			  <label for="name">Number</label>
+			  <input id="name" placeholder="Jane Smith">
+			  <br>
+			  <label for="name">Email</label>
+			  <input id="name" placeholder="Jane Smith">
+			  <br>
+			  <button id="submit">Add Contact</button>
+			  
+			</form>
 		</div>
 	</div>
 <script src="phone.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 </html>
