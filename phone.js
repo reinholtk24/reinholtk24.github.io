@@ -3,24 +3,58 @@ $(document).ready(function() { // do this when the document is loaded
 	$("#content_dialer").show(); // show the element with ID "element"
 	$("#content_list").hide(); // hide the element with ID "otherElement"
 	$("#content_add").hide();
+	var b1 = $("#button1")
+	b1.css("color","black");
+	b1.css("background","white");
+	b1.css("border-bottom","none");
+	b1.css("border-left",".2px solid");
+	b1.css("border-top",".2px solid");
 });
 
 $("#button1").click(function() { // when "button_id" is clicked
 	$("#content_dialer").show(); // show element
 	$("#content_list").hide(); // hide the element with ID "otherElement"
 	$("#content_add").hide();
+	$(this).css("color","black");
+	$(this).css("background","white");
+	$(this).css("border-bottom","none");
+	$(this).css("border-left",".2px solid");
+	$(this).css("border-top",".2px solid");
+	$("#button2").css("background","grey");
+	$("#button3").css("background","grey"); 
+	$("#button2").css("color","white");
+	$("#button3").css("color","white");
 });
 
 $("#button2").click(function() { // when "button_id" is clicked
 	$("#content_list").show(); // show element
 	$("#content_dialer").hide(); // hide the element with ID "otherElement"
 	$("#content_add").hide();
+	$(this).css("color","black");
+	$(this).css("background","white");
+	$(this).css("border-bottom","none");
+	$(this).css("border-left",".2px solid");
+	$(this).css("border-top",".2px solid");
+	$("#button1").css("background","grey");
+	$("#button3").css("background","grey"); 
+	$("#button1").css("color","white");
+	$("#button3").css("color","white");
+	
 });
 
 $("#button3").click(function() { // when "button_id" is clicked
 	$("#content_add").show(); // show element
 	$("#content_dialer").hide(); // hide the element with ID "otherElement"
 	$("#content_list").hide();
+	$(this).css("color","black");
+	$(this).css("background","white");
+	$(this).css("border-bottom","none");
+	$(this).css("border-left",".2px solid");
+	$(this).css("border-top",".2px solid");
+	$("#button2").css("background","grey");
+	$("#button1").css("background","grey"); 
+	$("#button2").css("color","white");
+	$("#button1").css("color","white");
 });
 
 $("#button3").click(function() { // when "button_id" is clicked
