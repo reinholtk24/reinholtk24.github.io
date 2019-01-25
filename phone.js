@@ -95,3 +95,21 @@ $("#star").click(function() { // when "button_id" is clicked
 	
 });
 
+$("#star").click(function() { // when "button_id" is clicked
+	var $nums = $('#inputDialer');
+	$nums.val($nums.val() + "*"); 
+	
+});
+
+$("#0").click(function() { // when "button_id" is clicked
+	var $nums = $('#inputDialer');
+	
+	$nums.val($nums.val() + "0"); 
+	
+});
+
+$("#clear").click(function() { // when "button_id" is clicked
+	var $nums = $('#inputDialer');
+	$nums.val(""); 
+	
+});

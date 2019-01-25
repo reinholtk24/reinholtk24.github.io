@@ -1,6 +1,27 @@
 /* make all buttons 20 by 20 pixels with white text and green background and a 10 pixel margin */
-button { width: 100px; height: 20px; background: grey; color: white; margin: 5px; }
+button { width: 200px; height: 80px; font-size:20px; background: grey; color: white; margin: 10px; }
 
+button.dialer { font-size: 20px; width: 100px; height: 60px; background: black; color: white; margin: 10px; border-radius: 20px;}
+button.contact { font-size: 20px; width: 100px; height: 60px; background: black; color: white; margin: 10 10 10 10; border-radius: 20px;}
+
+#clear { width:165px; font-weight: bold; height: 60px; margin:10px; color: cyan; background: red; border-radius: 20px;  }
+#call { width:165px; font-weight: bold; height: 60px; margin:10px; color: red; background: cyan; border-radius: 20px;}
+
+#submit { width:415px; font-weight: bold; height: 60px; margin:15 0 0 15; color: black; background: white; border-radius: 20px;}
+
+#content_add {float: left; background: black; margin-left: -20px; width: 120%; height: 100%;}
+
+h1 { font-size: 400%; margin: 10px;}
+
+#contentHeader { font-size: 400%; color: white; margin: 10 10 10 30;}
+
+#number {margin: 10 15 5 3;}
+#email { margin: 10 10 10 5;}
+
+label.add { font-weight:bold; height: 40px; color:white; font-size:20px; margin:10 2 10 20;}
+
+input.dialer { width: 345px; font-size: 20px; height: 40px; margin: 10 20 5 15;}
+input.add { width: 345px; font-size: 20px; height: 40px; margin: 10 20 5 5;}
 /* make all tags with the "cool" class name have blue text */
 .cool { color: blue; }
 

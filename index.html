@@ -13,14 +13,10 @@
 	</div>
 	<div id="content">
 		<div id="content_dialer">
+			<br>
+			<h1>Dialer</h1>
+			<input class="dialer" id="inputDialer"></input>
 			<table> 
-			<tr>
-			  <td>
-				<input style="width:300px;" id="inputDialer"></input>		  
-			  </td>
-			  <td></td>
-			  <td></td>
-			</tr>
 			<tr>
 				<td><button class="dialer" id="1">1</button></td>
 				<td><button class="dialer" id="2">2</button></td>
@@ -38,12 +34,18 @@
 			</tr>
 			<tr>
 				<td><button class="dialer" id="star">*</button></td>
-				<td><button class="dialer">Call</button></td>
+				<td><button class="dialer" id="0">0</button></td>
 				<td><button class="dialer" id="pound">#</button></td>
 			</tr>
 			</table>
+			
+			<button class="dialer" id="clear">Clear</button>
+			<button class="dialer" id="call">Call</button>
+			
 		</div>
 		<div id="content_list">
+			<br>
+			<h1>Contacts</h1>
 			<table> 
 			<tr>
 				<td><button class="contact">Joe</button></td>
@@ -63,15 +65,17 @@
 			</table>
 		</div>
 		<div id="content_add">
+			<br>
+			<h1 id="contentHeader">Add Contact</h1>
 			<form>
-			  <label for="name">Name</label>
-			  <input id="name" placeholder="Jane Smith">
+			  <label class="add" for="name">Name</label>
+			  <input class="add" id="name" placeholder="Lola Cola">
 			  <br>
-			  <label for="name">Number</label>
-			  <input id="name" placeholder="Jane Smith">
+			  <label class="add" for="name">Phone</label>
+			  <input class="add" id="number" placeholder="203-200-1800">
 			  <br>
-			  <label for="name">Email</label>
-			  <input id="name" placeholder="Jane Smith">
+			  <label class="add"  for="name">Email</label>
+			  <input class="add" id="email" placeholder="coolPerson@cool.sweet">
 			  <br>
 			  <button id="submit">Add Contact</button>
 			  
