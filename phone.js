@@ -11,6 +11,12 @@ $(document).ready(function() { // do this when the document is loaded
 	b1.css("border-top",".2px solid");
 });
 
+function stext() {
+    var but = document.getElementById("#button1"); 
+    but.style.color="black";
+    
+}
+
 $("#button1").click(function() { // when "button_id" is clicked
 	$("#content_dialer").show(); // show element
 	$("#content_list").hide(); // hide the element with ID "otherElement"
