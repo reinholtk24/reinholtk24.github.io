@@ -1,0 +1,112 @@
+<html lang="en">
+<head>
+	<title>GUI Input Interaction</title>
+	<link rel="stylesheet" href="phone.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+	<div id="tab_bar" accesskey="m">
+	<button tabindex="0" class="buttons" id="button1" accesskey="d">Dialer</button>
+	<button tabindex="0" class="buttons" id="button2" accesskey="l">Contact List</button>
+	<button tabindex="0" class="buttons" id="button3" accesskey="c">Add Contact</button>
+	<button tabindex="0" class="buttons" id="button4" accesskey="a">About</button>
+	</div>
+	<div id="content">
+		<div id="content_dialer">
+			<br>
+			<h1>Dialer</h1>
+			<input class="dialer" id="inputDialer"></input>
+			<table> 
+				<caption hidden>"Table with phone buttons in each row. Row 1 has buttons 1 through 3, row 2 has buttons 4 through 6 and so on. The table has 4 rows of buttons consistent with a standard cell phone button layout. "</caption>
+			<tr>
+				<td><button class="dialer" id="1" accesskey="1">1<br><div style="color:black; font-size:12px;">1</div></button></td>
+				<td><button class="dialer" id="2" accesskey="2">2<br><div id="sub">ABC</div></button></td>
+				<td><button class="dialer" id="3" accesskey="3">3<br><div id="sub">DEF</div></button></td>
+			</tr>
+			<tr>
+				<td><button class="dialer" id="4" accesskey="4">4<br><div id="sub">GHI</div></button></td>
+				<td><button class="dialer" id="5" accesskey="5">5<br><div id="sub">JKL</div></button></td>
+				<td><button class="dialer" id="6" accesskey="6">6<br><div id="sub">MNO</div></button></td>
+			</tr>
+			<tr>
+				<td><button class="dialer" id="7" accesskey="7">7<br><div id="sub">PQRS</div></button></td>
+				<td><button class="dialer" id="8" accesskey="8">8<br><div id="sub">TUV</div></button></td>
+				<td><button class="dialer" id="9" accesskey="9">9<br><div id="sub">XYWZ</div></button></td>
+			</tr>
+			<tr>
+				<td><button class="dialer" id="star" accesskey="*">*</button></td>
+				<td><button class="dialer" id="0" accesskey="0">0</button></td>
+				<td><button class="dialer" id="pound" accesskey="#">#</button></td>
+			</tr>
+			</table>
+			
+			<button class="dialer" id="clear" accesskey="_">Clear</button>
+			<button class="dialer" id="call" accesskey="+">Call</button>
+			
+		</div>
+		<div id="content_list">
+			<br>
+			<h1>Contacts</h1>
+			<table class="contact_table"> 
+			<tr id="header_row">
+				<th scope="col" id="header">Name</th>
+				<th scope="col" id="header">Gamer Tag</th>
+				<th scope="col" id="header">Main in Ultimate Smash</th>
+			</tr>
+			<tr>
+				<th scope="row">Cody</th>
+				<td>ChapterPlanet</td>
+				<td>Pit</td>
+			</tr>
+			<tr>
+				<th scope="row">Taylor</th>
+				<td>Noobie T</td>
+				<td>King DDD</td>
+			</tr>
+			<tr>
+				<th scope="row">Lauren</th>
+				<td>Double Blowout</td>
+				<td>Samus</td>
+			</tr>
+			</table>
+		</div>
+		<div id="content_add">
+			<br>
+			<h1 id="contentHeader">Add Contact</h1>
+			<form>
+			  <label class="add" for="name">Name</label>
+			  <input class="add" id="name" placeholder="Lola Cola">
+			  <br>
+			  <label class="add" for="name">Phone</label>
+			  <input class="add" id="number" placeholder="203-200-1800">
+			  <br>
+			  <label class="add"  for="name">Email</label>
+			  <input class="add" id="email" placeholder="coolPerson@cool.sweet">
+			  <br>
+			  <button id="submit">Add Contact</button>
+			  
+			</form>
+		</div>
+		<div id="about">
+			<h2>Accessibility Features</h2>
+			<h3>Tab Control</h3>
+			<h2>Keyboard Shortcuts</h2>
+			<table>
+				<tr>
+				<th></th>
+				</tr>
+			</table>
+			<h2>Accessible Tables</h2>
+			<h3>Table Headers</h3>
+			<h3>Scope Features</h3>
+			<h2>Captioned Images</h2>
+			<h3>HTML alt Tag</h3>
+			<h3>HTML longdesc Tag</h3>
+			<h2>About Page</h2>
+			<table></table>
+		</div>
+	</div>
+<script src="phone.js"></script>
+</body>
+</html>

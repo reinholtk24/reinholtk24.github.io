@@ -19,6 +19,30 @@ h1 { font-size: 400%; margin: 10px;}
 
 #sub { font-size: 12px; font-weight: normal; color: white; cursor:url(zelda2.png), pointer;}
 
+
+.contact_table { font-size: 25px; margin: 20px;border-collapse: collapse;}
+
+#headers {font-size: 30px;}
+#header_row {
+  border: solid;
+  border-width: 3px 0;
+  padding:40px;
+  padding-left: 40px;
+  background: lightgrey;
+ 
+}
+
+.contact_table tr{
+  border: solid;
+  border-width: 1px 0;
+ 
+}
+.contact_table td{
+	padding: 40px;
+	text-align: left;
+}
+
+
 #number {margin: 10 15 5 3;}
 #email { margin: 10 10 10 5;}
 
