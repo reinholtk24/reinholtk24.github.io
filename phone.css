@@ -27,9 +27,12 @@ h1 { font-size: 400%; margin: 10px;}
   border: solid;
   border-width: 3px 0;
   padding:40px;
-  padding-left: 40px;
   background: lightgrey;
  
+}
+
+.contact_table th{
+  padding: 30px;
 }
 
 .contact_table tr{
@@ -37,6 +40,12 @@ h1 { font-size: 400%; margin: 10px;}
   border-width: 1px 0;
  
 }
+
+.contact_table img{
+	width: 70px; 
+	height: 70px;
+}
+
 .contact_table td{
 	padding: 40px;
 	text-align: left;
