@@ -1,5 +1,31 @@
 // Wait for the page to be ready
- var synth = new Tone.Synth().toMaster()
+//var synth = new Tone.Synth().toMaster()
+ var synth = new Tone.Synth({
+  oscillator: {
+    type: 'fmsquare',
+    modulationType: 'sawtooth',
+    modulationIndex: 3,
+    harmonicity: 3.4
+  },
+  envelope: {
+    attack: 0.001,
+    decay: 0.1,
+    sustain: 0.1,
+    release: 0.1
+  }
+}).toMaster()
+
+/*
+$("#chord").mousedown(function() { // when "button_id" is clicked
+	var distortion = new Tone.Distortion(0.6)
+var tremolo = new Tone.Tremolo().start()
+
+var polySynth = new Tone.PolySynth(4, Tone.Synth).chain(distortion, tremolo, Tone.Master)
+	polySynth.triggerAttack(['C4', 'E4', 'G4', 'B4']) 
+	
+});
+* */
+
 window.addEventListener("load", function(e) {
   console.log("Page loaded!");
   // Store the color we will be tracking (selectable by clicking on the webcam feed)
@@ -11,6 +37,20 @@ window.addEventListener("load", function(e) {
   var context = canvas.getContext('2d');
   var webcam = document.getElementById('webcam');
   var swatch = document.getElementById("color");
+  
+  var distortion = new Tone.Distortion(0.6)
+var tremolo = new Tone.Tremolo().start()
+
+var polySynth = new Tone.PolySynth(4, Tone.Synth).chain(distortion, tremolo, Tone.Master)
+
+document.querySelector('#chord').addEventListener('mousedown', () => { 
+
+	polySynth.triggerAttack(['C3', 'E3', 'G3', 'B3']) 
+})
+
+document.querySelector('#chord').addEventListener('mouseup', () => { 
+	polySynth.triggerRelease(['C3', 'E3', 'G3', 'B3']) 
+})
 
   // Register our custom color tracking function
   tracking.ColorTracker.registerColor('dynamic', function(r, g, b) {
@@ -57,6 +97,8 @@ window.addEventListener("load", function(e) {
 
 });
 
+
+
 // Calculates the Euclidian distance between the target color and the actual color
 function getColorDistance(target, actual) {
   return Math.sqrt(
@@ -97,17 +139,42 @@ function drawRect(rect, context, color) {
   document.getElementById("position").innerHTML = "Current Position  X: " + rect.x.toString() + " Y: " + rect.y.toString(); 
   var note = ""; 
 //play a middle 'C' for the duration of an 8th note
-	if(rect.x < 150){
+	var dif = 50; 
+	if(rect.x < dif){
+	synth.triggerAttackRelease('C2', '64n')
+	note = "C2"; 
+	}
+	else if(rect.x >= (dif) && rect.x < (dif*2)){
+	synth.triggerAttackRelease('D2', '64n')
+	note = "D2"; 
+	}
+	else if(rect.x >= (dif*2) && rect.x < (dif*3)){
+	synth.triggerAttackRelease('E2', '64n')
+	note = "E2"; 
+	}
+	else if(rect.x >= (dif*3) && rect.x < (dif*4)){
+	synth.triggerAttackRelease('F2', '64n')
+	note = "F2"; 
+	}
+	else if(rect.x >= (dif*4) && rect.x < (dif*5)){
+	synth.triggerAttackRelease('D3', '64n')
+	note = "D3"; 
+	}
+	else if(rect.x >= (dif*5) && rect.x < (dif*6)){
+	synth.triggerAttackRelease('E3', '64n')
+	note = "E3"; 
+	}
+	else if(rect.x >= (dif*6) && rect.x < (dif*7)){
+	synth.triggerAttackRelease('F3', '64n')
+	note = "F3"; 
+	}
+	else if(rect.x >= (dif*7) && rect.x < (dif*8)){
 	synth.triggerAttackRelease('C4', '64n')
 	note = "C4"; 
 	}
-	else if(rect.x >= 150 && rect.x < 250){
-	synth.triggerAttackRelease('E4', '64n')
-	note = "E4"; 
-	}
 	else{
-		synth.triggerAttackRelease('C5','64n')
-		note = "C5"; 
+		synth.triggerAttackRelease('E4','64n')
+		note = "E4"; 
 	}
 	document.getElementById("note").innerHTML = "Current Note: " +note; 
 }
