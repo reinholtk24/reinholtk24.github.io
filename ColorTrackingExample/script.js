@@ -87,7 +87,7 @@ document.querySelector('#chord').addEventListener('mouseup', () => {
   
 
   // Start tracking
-  tracking.track(webcam, tracker, { camera: true } );
+  //tracking.track(webcam, tracker, { camera: true } );
 
   // Add listener for the click event on the video
   webcam.addEventListener("click", function (e) {
@@ -111,14 +111,15 @@ document.querySelector('#chord').addEventListener('mouseup', () => {
 function play(){
        var webcam = document.getElementById('webcam');
        if (navigator.mediaDevices.getUserMedia) {       
-    navigator.mediaDevices.getUserMedia({video: true})
+    navigator.mediaDevices.getUserMedia({video: { facingMode: "user" }})
   .then(function(stream) {
     webcam.srcObject = stream;
   })
   .catch(function(err0r) {
     console.log("Something went wrong!");
   });
-}
+}		
+		
        webcam.play();
                  }
 
