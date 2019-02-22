@@ -49,6 +49,7 @@ var polySynth = new Tone.PolySynth(4, Tone.Synth).chain(distortion, tremolo, Ton
 
 document.querySelector('#chord').addEventListener('touchstart', () => { 
 	alert("Hello");
+	play(); 
 })
 /*
 document.querySelector('#chord').addEventListener('mousedown', () => { 
