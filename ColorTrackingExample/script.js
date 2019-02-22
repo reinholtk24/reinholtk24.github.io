@@ -79,15 +79,7 @@ document.querySelector('#chord').addEventListener('mouseup', () => {
     }
 
   });
-  if (navigator.mediaDevices.getUserMedia) {       
-    navigator.mediaDevices.getUserMedia({video: true})
-  .then(function(stream) {
-    webcam.srcObject = stream;
-  })
-  .catch(function(err0r) {
-    console.log("Something went wrong!");
-  });
-}
+  
 
   // Start tracking
   tracking.track(webcam, tracker, { camera: true } );
@@ -109,7 +101,19 @@ document.querySelector('#chord').addEventListener('mouseup', () => {
   });
 
 });
-
+function play(){
+       var webcam = document.getElementById('webcam');
+       if (navigator.mediaDevices.getUserMedia) {       
+    navigator.mediaDevices.getUserMedia({video: true})
+  .then(function(stream) {
+    webcam.srcObject = stream;
+  })
+  .catch(function(err0r) {
+    console.log("Something went wrong!");
+  });
+}
+       webcam.play();
+                 }
 
 
 // Calculates the Euclidian distance between the target color and the actual color
