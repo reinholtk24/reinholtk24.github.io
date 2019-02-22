@@ -1,6 +1,10 @@
 // Wait for the page to be ready
 //var synth = new Tone.Synth().toMaster()
- var synth = new Tone.Synth({
+
+var reverb = new Tone.JCReverb(0.4).connect(Tone.Master);
+var delay = new Tone.FeedbackDelay(0.5);
+var synth =new Tone.DuoSynth().chain(delay, reverb);
+ /*var synth = new Tone.Synth({
   oscillator: {
     type: 'fmsquare',
     modulationType: 'sawtooth',
@@ -13,7 +17,7 @@
     sustain: 0.1,
     release: 0.1
   }
-}).toMaster()
+}).toMaster()*/
 
 /*
 $("#chord").mousedown(function() { // when "button_id" is clicked
@@ -128,6 +132,52 @@ function getColorAt(webcam, x, y) {
 
 }
 
+function setVolume(y){
+	var thresh = 20; 
+	if(y < thresh){
+		synth.volume.value = -10; 
+	}
+	else if(y >= thresh && y < thresh*2){
+		synth.volume.value = -12; 
+	}
+	else if(y >= thresh*2 && y < thresh*3){
+		synth.volume.value = -14; 
+	}
+	else if(y >= thresh*3 && y < thresh*4){
+		synth.volume.value = -16; 
+	}
+	else if(y >= thresh*4 && y < thresh*5){
+		synth.volume.value = -18; 
+	}
+	else if(y >= thresh*5 && y < thresh*6){
+		synth.volume.value = -20; 
+	}
+	else if(y >= thresh*6 && y < thresh*7){
+		synth.volume.value = -22; 
+	}
+	else if(y >= thresh*7 && y < thresh*8){
+		synth.volume.value = -24; 
+	}
+	else if(y >= thresh*8 && y < thresh*9){
+		synth.volume.value = -26; 
+	}
+	else if(y >= thresh*9 && y < thresh*10){
+		synth.volume.value = -28; 
+	}
+	else if(y >= thresh*10 && y < thresh*11){
+		synth.volume.value = -30; 
+	}
+	else if(y >= thresh*11 && y < thresh*12){
+		synth.volume.value = -32; 
+	}
+	else if(y >= thresh*13 && y < thresh*14){
+		synth.volume.value = -34; 
+	}
+	else{
+		synth.volume.value = -36; 
+	}
+}
+
 // Draw a colored rectangle on the canvas
 function drawRect(rect, context, color) {
   context.strokeStyle = "rgb(" + color.r + ", " + color.g + ", " + color.b + ")";
@@ -135,46 +185,56 @@ function drawRect(rect, context, color) {
   console.log("Rect x, Rect y"); 
   console.log(rect.x); 
   console.log(rect.y); 
-  
+  console.log("Volume"); 
+  setVolume(rect.y); 
+  console.log(synth.volume.value); 
   document.getElementById("position").innerHTML = "Current Position  X: " + rect.x.toString() + " Y: " + rect.y.toString(); 
   var note = ""; 
 //play a middle 'C' for the duration of an 8th note
 	var dif = 50; 
+	var noteLength = '64n';
 	if(rect.x < dif){
-	synth.triggerAttackRelease('C2', '64n')
-	note = "C2"; 
+		note = "C4"; 
+		synth.triggerAttackRelease(note, noteLength)
 	}
 	else if(rect.x >= (dif) && rect.x < (dif*2)){
-	synth.triggerAttackRelease('D2', '64n')
-	note = "D2"; 
+		note = "D4"; 
+		synth.triggerAttackRelease(note, noteLength)
+	
 	}
 	else if(rect.x >= (dif*2) && rect.x < (dif*3)){
-	synth.triggerAttackRelease('E2', '64n')
-	note = "E2"; 
+		note = "E4"; 
+		synth.triggerAttackRelease(note, noteLength)
+	
 	}
 	else if(rect.x >= (dif*3) && rect.x < (dif*4)){
-	synth.triggerAttackRelease('F2', '64n')
-	note = "F2"; 
+		note = "F4"; 
+		synth.triggerAttackRelease(note, noteLength)
+	
 	}
 	else if(rect.x >= (dif*4) && rect.x < (dif*5)){
-	synth.triggerAttackRelease('D3', '64n')
-	note = "D3"; 
+		note = "D5";
+		synth.triggerAttackRelease(note, noteLength)
+		 
 	}
 	else if(rect.x >= (dif*5) && rect.x < (dif*6)){
-	synth.triggerAttackRelease('E3', '64n')
-	note = "E3"; 
+		note = "E5"; 
+		synth.triggerAttackRelease(note, noteLength)
+	
 	}
 	else if(rect.x >= (dif*6) && rect.x < (dif*7)){
-	synth.triggerAttackRelease('F3', '64n')
-	note = "F3"; 
+		note = "F5"; 
+		synth.triggerAttackRelease(note, noteLength)
+	
 	}
 	else if(rect.x >= (dif*7) && rect.x < (dif*8)){
-	synth.triggerAttackRelease('C4', '64n')
-	note = "C4"; 
+		note = "C6"; 
+	synth.triggerAttackRelease(note, noteLength)
 	}
 	else{
-		synth.triggerAttackRelease('E4','64n')
-		note = "E4"; 
+		note = "E6"; 
+		synth.triggerAttackRelease(note,noteLength)
+		
 	}
 	document.getElementById("note").innerHTML = "Current Note: " +note; 
 }
