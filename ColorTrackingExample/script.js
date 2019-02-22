@@ -79,6 +79,15 @@ document.querySelector('#chord').addEventListener('mouseup', () => {
     }
 
   });
+  if (navigator.mediaDevices.getUserMedia) {       
+    navigator.mediaDevices.getUserMedia({video: true})
+  .then(function(stream) {
+    webcam.srcObject = stream;
+  })
+  .catch(function(err0r) {
+    console.log("Something went wrong!");
+  });
+}
 
   // Start tracking
   tracking.track(webcam, tracker, { camera: true } );
