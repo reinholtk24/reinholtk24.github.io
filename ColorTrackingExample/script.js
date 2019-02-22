@@ -47,12 +47,10 @@ var tremolo = new Tone.Tremolo().start()
 
 var polySynth = new Tone.PolySynth(4, Tone.Synth).chain(distortion, tremolo, Tone.Master)
 
-document.querySelector('#chord').addEventListener('click tap', () => { 
+document.querySelector('#chord').addEventListener('touchstart', () => { 
 	alert("Hello");
-
-	polySynth.triggerAttack(['C3', 'E3', 'G3', 'B3']) 
 })
-
+/*
 document.querySelector('#chord').addEventListener('mousedown', () => { 
 
 	polySynth.triggerAttack(['C3', 'E3', 'G3', 'B3']) 
@@ -60,7 +58,7 @@ document.querySelector('#chord').addEventListener('mousedown', () => {
 
 document.querySelector('#chord').addEventListener('mouseup', () => { 
 	polySynth.triggerRelease(['C3', 'E3', 'G3', 'B3']) 
-})
+})*/
 
   // Register our custom color tracking function
   tracking.ColorTracker.registerColor('dynamic', function(r, g, b) {
