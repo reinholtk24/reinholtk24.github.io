@@ -87,7 +87,7 @@ document.querySelector('#chord').addEventListener('mouseup', () => {
   
 
   // Start tracking
-  //tracking.track(webcam, tracker, { camera: true } );
+  tracking.track(webcam, tracker, { camera: true } );
 
   // Add listener for the click event on the video
   webcam.addEventListener("click", function (e) {
