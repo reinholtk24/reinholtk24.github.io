@@ -1,34 +1,6 @@
-// Wait for the page to be ready
-//var synth = new Tone.Synth().toMaster()
-
 var reverb = new Tone.JCReverb(0.4).connect(Tone.Master);
 var delay = new Tone.FeedbackDelay(0.5);
 var synth; 
- /*var synth = new Tone.Synth({
-  oscillator: {
-    type: 'fmsquare',
-    modulationType: 'sawtooth',
-    modulationIndex: 3,
-    harmonicity: 3.4
-  },
-  envelope: {
-    attack: 0.001,
-    decay: 0.1,
-    sustain: 0.1,
-    release: 0.1
-  }
-}).toMaster()*/
-
-/*
-$("#chord").mousedown(function() { // when "button_id" is clicked
-	var distortion = new Tone.Distortion(0.6)
-var tremolo = new Tone.Tremolo().start()
-
-var polySynth = new Tone.PolySynth(4, Tone.Synth).chain(distortion, tremolo, Tone.Master)
-	polySynth.triggerAttack(['C4', 'E4', 'G4', 'B4']) 
-	
-});
-* */
 
 var drums = false; 
 
@@ -114,14 +86,14 @@ window.addEventListener("load", function(e) {
     }
 })
 
-
+/*
 document.querySelector('#chord').addEventListener('touchstart', () => { 
 	play(); 
 })
 document.querySelector('#chord').addEventListener('mousedown', () => { 
 	play(); 
 })
-
+*/
 document.querySelector('#test').addEventListener('mousedown',() => {
 	 hideToggle("#test","#ui","#vid");
 })
