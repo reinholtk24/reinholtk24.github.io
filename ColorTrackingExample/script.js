@@ -3,7 +3,7 @@
 
 var reverb = new Tone.JCReverb(0.4).connect(Tone.Master);
 var delay = new Tone.FeedbackDelay(0.5);
-var synth =new Tone.DuoSynth().chain(delay, reverb);
+var synth; 
  /*var synth = new Tone.Synth({
   oscillator: {
     type: 'fmsquare',
@@ -30,6 +30,8 @@ var polySynth = new Tone.PolySynth(4, Tone.Synth).chain(distortion, tremolo, Ton
 });
 * */
 
+var drums = false; 
+
 window.addEventListener("load", function(e) {
   console.log("Page loaded!");
   // Store the color we will be tracking (selectable by clicking on the webcam feed)
@@ -41,16 +43,44 @@ window.addEventListener("load", function(e) {
   var context = canvas.getContext('2d');
   var webcam = document.getElementById('webcam');
   var swatch = document.getElementById("color");
+  var drumMachine = document.getElementById("drums");
+  
+  hideToggle("#test","#ui","#vid");
+  
+  document.getElementById("connect").addEventListener("click", function() {
+    console.log("Button clicked");
+    Tone.context.resume();
+    if (window.DeviceOrientationEvent) {
+        console.log("DeviceOrientationEvent supported");
+        if (!listening) {
+            console.log("Starting orientation capture");
+            window.addEventListener('deviceorientation', orientationHandler, false);
+        } else {
+            console.log("Stopping orientation capture");
+            window.removeEventListener('deviceorientation', orientationHandler, false);
+        }
+        listening = !listening;
+    } else {
+        console.log("DeviceMotionEvent is not supported.")
+    }
+});
   
   var distortion = new Tone.Distortion(0.6)
 var tremolo = new Tone.Tremolo().start()
-
+	synth=new Tone.DuoSynth().chain(delay, reverb);
 var polySynth = new Tone.PolySynth(4, Tone.Synth).chain(distortion, tremolo, Tone.Master)
 
 document.querySelector('#chord').addEventListener('touchstart', () => { 
-	alert("Hello");
 	play(); 
 })
+document.querySelector('#chord').addEventListener('mousedown', () => { 
+	play(); 
+})
+
+document.querySelector('#test').addEventListener('mousedown',() => {
+	 hideToggle("#test","#ui","#vid");
+})
+
 /*
 document.querySelector('#chord').addEventListener('mousedown', () => { 
 
@@ -85,9 +115,9 @@ document.querySelector('#chord').addEventListener('mouseup', () => {
 
   });
   
-
   // Start tracking
   tracking.track(webcam, tracker, { camera: true } );
+  
 
   // Add listener for the click event on the video
   webcam.addEventListener("click", function (e) {
@@ -107,8 +137,41 @@ document.querySelector('#chord').addEventListener('mouseup', () => {
 
 });
 
+var on = true; 
+var gyro = false; 
 
+function drumToggle()
+{
+	if(drums == false){
+		$("#drums").show();
+		drums = true; 
+	} else {
+		$("#drums").hide();
+		drums = false;  
+	}
+}
+
+function hideToggle(button, elem, elem2) {
+  if(on == true){
+    $(elem).hide();
+    $(elem2).hide();
+    $("#chord").hide(); 
+    document.getElementById("note").innerHTML = "";
+    document.getElementById("position").innerHTML = ""; 
+    Tone.Master.mute = true; 
+    on = false;  
+  } else{
+	$("#chord").show(); 
+	$(elem2).show();
+    $(elem).show(); 
+	Tone.Master.mute = false;
+	on = true;   
+  }
+}
+
+ 
 function play(){
+
        var webcam = document.getElementById('webcam');
        if (navigator.mediaDevices.getUserMedia) {       
     navigator.mediaDevices.getUserMedia({video: { facingMode: "user" }})
@@ -122,6 +185,11 @@ function play(){
 		
        webcam.play();
                  }
+
+function stop(){
+	
+}
+
 
 
 // Calculates the Euclidian distance between the target color and the actual color
@@ -257,5 +325,10 @@ function drawRect(rect, context, color) {
 		synth.triggerAttackRelease(note,noteLength)
 		
 	}
-	document.getElementById("note").innerHTML = "Current Note: " +note; 
+	if(on == false){
+		document.getElementById("note").innerHTML = ""; 
+		document.getElementById("position").innerHTML = "";  
+	}else{
+		document.getElementById("note").innerHTML = "Current Note: " +note; 
+	}
 }
