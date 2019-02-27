@@ -32,10 +32,11 @@ var polySynth = new Tone.PolySynth(4, Tone.Synth).chain(distortion, tremolo, Ton
 
 var drums = false; 
 
-window.addEventListener("load", function(e) {
-  console.log("Page loaded!");
-  // Store the color we will be tracking (selectable by clicking on the webcam feed)
-  var color = {r: 255, g: 0, b: 0};
+var color = {r: 255, g: 0, b: 0};
+
+function begin(){
+	// Store the color we will be tracking (selectable by clicking on the webcam feed)
+  //var color = {r: 255, g: 0, b: 0};
 
   // Grab reference to the tags we will be using
   var slider = document.getElementById("tolerance");
@@ -43,54 +44,7 @@ window.addEventListener("load", function(e) {
   var context = canvas.getContext('2d');
   var webcam = document.getElementById('webcam');
   var swatch = document.getElementById("color");
-  var drumMachine = document.getElementById("drums");
   
-  hideToggle("#test","#ui","#vid");
-  
-  document.getElementById("connect").addEventListener("click", function() {
-    console.log("Button clicked");
-    Tone.context.resume();
-    if (window.DeviceOrientationEvent) {
-        console.log("DeviceOrientationEvent supported");
-        if (!listening) {
-            console.log("Starting orientation capture");
-            window.addEventListener('deviceorientation', orientationHandler, false);
-        } else {
-            console.log("Stopping orientation capture");
-            window.removeEventListener('deviceorientation', orientationHandler, false);
-        }
-        listening = !listening;
-    } else {
-        console.log("DeviceMotionEvent is not supported.")
-    }
-});
-  
-  var distortion = new Tone.Distortion(0.6)
-var tremolo = new Tone.Tremolo().start()
-	synth=new Tone.DuoSynth().chain(delay, reverb);
-var polySynth = new Tone.PolySynth(4, Tone.Synth).chain(distortion, tremolo, Tone.Master)
-
-document.querySelector('#chord').addEventListener('touchstart', () => { 
-	play(); 
-})
-document.querySelector('#chord').addEventListener('mousedown', () => { 
-	play(); 
-})
-
-document.querySelector('#test').addEventListener('mousedown',() => {
-	 hideToggle("#test","#ui","#vid");
-})
-
-/*
-document.querySelector('#chord').addEventListener('mousedown', () => { 
-
-	polySynth.triggerAttack(['C3', 'E3', 'G3', 'B3']) 
-})
-
-document.querySelector('#chord').addEventListener('mouseup', () => { 
-	polySynth.triggerRelease(['C3', 'E3', 'G3', 'B3']) 
-})*/
-
   // Register our custom color tracking function
   tracking.ColorTracker.registerColor('dynamic', function(r, g, b) {
     return getColorDistance(color, {r: r, g: g, b: b}) < slider.value
@@ -118,7 +72,98 @@ document.querySelector('#chord').addEventListener('mouseup', () => {
   // Start tracking
   tracking.track(webcam, tracker, { camera: true } );
   
+}
 
+window.addEventListener("load", function(e) {
+  console.log("Page loaded!");
+  // Store the color we will be tracking (selectable by clicking on the webcam feed)
+  
+
+  // Grab reference to the tags we will be using
+  var slider = document.getElementById("tolerance");
+  var canvas  = document.getElementById('canvas');
+  var context = canvas.getContext('2d');
+  var webcam = document.getElementById('webcam');
+  var swatch = document.getElementById("color");
+  var drumMachine = document.getElementById("drums");
+  synth=new Tone.DuoSynth().chain(delay, reverb); 
+  
+  hideToggle("#test","#ui","#vid");
+  
+
+ document.querySelector("#gyro").addEventListener('mousedown', () => {
+    console.log("Button clicked");
+    Tone.context.resume();
+    if (window.DeviceOrientationEvent) {
+        console.log("DeviceOrientationEvent supported");
+        gyro = true; 
+        document.getElementById("gyro").value = "Gyro Theremin ON"; 
+        if (!listening) {
+            console.log("Starting orientation capture");
+            window.addEventListener('deviceorientation', orientationHandler, false);
+        } else {
+			gyro = false; 
+			document.getElementById("gyro").value = "Gyro Theremin OFF";
+			document.getElementById("status").innerHTML = "";
+            console.log("Stopping orientation capture");
+            window.removeEventListener('deviceorientation', orientationHandler, false);
+        }
+        listening = !listening;
+    } else {
+        console.log("DeviceMotionEvent is not supported.")
+    }
+})
+
+
+document.querySelector('#chord').addEventListener('touchstart', () => { 
+	play(); 
+})
+document.querySelector('#chord').addEventListener('mousedown', () => { 
+	play(); 
+})
+
+document.querySelector('#test').addEventListener('mousedown',() => {
+	 hideToggle("#test","#ui","#vid");
+})
+
+/*
+document.querySelector('#chord').addEventListener('mousedown', () => { 
+
+	polySynth.triggerAttack(['C3', 'E3', 'G3', 'B3']) 
+})
+
+document.querySelector('#chord').addEventListener('mouseup', () => { 
+	polySynth.triggerRelease(['C3', 'E3', 'G3', 'B3']) 
+})*/
+/*
+  // Register our custom color tracking function
+  tracking.ColorTracker.registerColor('dynamic', function(r, g, b) {
+    return getColorDistance(color, {r: r, g: g, b: b}) < slider.value
+  });
+
+  // Create the color tracking object
+  var tracker = new tracking.ColorTracker("dynamic");
+
+  // Add callback for the "track" event
+  tracker.on('track', function(e) {
+
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (e.data.length !== 0) {
+
+      e.data.forEach(function(rect) {
+        // console.log(rect);
+        drawRect(rect, context, color);
+      });
+
+    }
+
+  });
+  
+  // Start tracking
+  tracking.track(webcam, tracker, { camera: true } );
+  
+	*/
   // Add listener for the click event on the video
   webcam.addEventListener("click", function (e) {
 
@@ -136,9 +181,8 @@ document.querySelector('#chord').addEventListener('mouseup', () => {
   });
 
 });
-
-var on = true; 
 var gyro = false; 
+var on = true; 
 
 function drumToggle()
 {
@@ -155,16 +199,23 @@ function hideToggle(button, elem, elem2) {
   if(on == true){
     $(elem).hide();
     $(elem2).hide();
+    document.getElementById("test").value = "Webcam Theremin OFF"; 
     $("#chord").hide(); 
     document.getElementById("note").innerHTML = "";
     document.getElementById("position").innerHTML = ""; 
-    Tone.Master.mute = true; 
+    //Tone.Master.mute = true;
+    synth.dispose();  
     on = false;  
   } else{
 	$("#chord").show(); 
 	$(elem2).show();
-    $(elem).show(); 
-	Tone.Master.mute = false;
+    $(elem).show();
+    begin(); 
+    document.getElementById("test").value = "Webcam Theremin ON";
+    var distortion = new Tone.Distortion(0.6)
+	var tremolo = new Tone.Tremolo().start()
+	synth=new Tone.DuoSynth().chain(delay, reverb); 
+	//Tone.Master.mute = false;
 	on = true;   
   }
 }
@@ -187,7 +238,9 @@ function play(){
                  }
 
 function stop(){
-	
+	var webcam = document.getElementById('webcam');
+		
+       webcam.pause();
 }
 
 
@@ -275,55 +328,57 @@ function drawRect(rect, context, color) {
   console.log(rect.x); 
   console.log(rect.y); 
   console.log("Volume"); 
-  setVolume(rect.y); 
-  console.log(synth.volume.value); 
-  document.getElementById("position").innerHTML = "Current Position  X: " + rect.x.toString() + " Y: " + rect.y.toString(); 
-  var note = ""; 
-//play a middle 'C' for the duration of an 8th note
-	var dif = 50; 
-	var noteLength = '64n';
-	if(rect.x < dif){
-		note = "C4"; 
-		synth.triggerAttackRelease(note, noteLength)
-	}
-	else if(rect.x >= (dif) && rect.x < (dif*2)){
-		note = "D4"; 
-		synth.triggerAttackRelease(note, noteLength)
-	
-	}
-	else if(rect.x >= (dif*2) && rect.x < (dif*3)){
-		note = "E4"; 
-		synth.triggerAttackRelease(note, noteLength)
-	
-	}
-	else if(rect.x >= (dif*3) && rect.x < (dif*4)){
-		note = "F4"; 
-		synth.triggerAttackRelease(note, noteLength)
-	
-	}
-	else if(rect.x >= (dif*4) && rect.x < (dif*5)){
-		note = "D5";
-		synth.triggerAttackRelease(note, noteLength)
-		 
-	}
-	else if(rect.x >= (dif*5) && rect.x < (dif*6)){
-		note = "E5"; 
-		synth.triggerAttackRelease(note, noteLength)
-	
-	}
-	else if(rect.x >= (dif*6) && rect.x < (dif*7)){
-		note = "F5"; 
-		synth.triggerAttackRelease(note, noteLength)
-	
-	}
-	else if(rect.x >= (dif*7) && rect.x < (dif*8)){
-		note = "C6"; 
-	synth.triggerAttackRelease(note, noteLength)
-	}
-	else{
-		note = "E6"; 
-		synth.triggerAttackRelease(note,noteLength)
+  if(on == true){
+	  setVolume(rect.y); 
+	  console.log(synth.volume.value); 
+	  document.getElementById("position").innerHTML = "Current Position  X: " + rect.x.toString() + " Y: " + rect.y.toString(); 
+	  var note = ""; 
+	//play a middle 'C' for the duration of an 8th note
+		var dif = 50; 
+		var noteLength = '64n';
+		if(rect.x < dif){
+			note = "C4"; 
+			synth.triggerAttackRelease(note, noteLength)
+		}
+		else if(rect.x >= (dif) && rect.x < (dif*2)){
+			note = "D4"; 
+			synth.triggerAttackRelease(note, noteLength)
 		
+		}
+		else if(rect.x >= (dif*2) && rect.x < (dif*3)){
+			note = "E4"; 
+			synth.triggerAttackRelease(note, noteLength)
+		
+		}
+		else if(rect.x >= (dif*3) && rect.x < (dif*4)){
+			note = "F4"; 
+			synth.triggerAttackRelease(note, noteLength)
+		
+		}
+		else if(rect.x >= (dif*4) && rect.x < (dif*5)){
+			note = "D5";
+			synth.triggerAttackRelease(note, noteLength)
+			 
+		}
+		else if(rect.x >= (dif*5) && rect.x < (dif*6)){
+			note = "E5"; 
+			synth.triggerAttackRelease(note, noteLength)
+		
+		}
+		else if(rect.x >= (dif*6) && rect.x < (dif*7)){
+			note = "F5"; 
+			synth.triggerAttackRelease(note, noteLength)
+		
+		}
+		else if(rect.x >= (dif*7) && rect.x < (dif*8)){
+			note = "C6"; 
+		synth.triggerAttackRelease(note, noteLength)
+		}
+		else{
+			note = "E6"; 
+			synth.triggerAttackRelease(note,noteLength)
+			
+		}
 	}
 	if(on == false){
 		document.getElementById("note").innerHTML = ""; 
@@ -332,3 +387,105 @@ function drawRect(rect, context, color) {
 		document.getElementById("note").innerHTML = "Current Note: " +note; 
 	}
 }
+
+
+
+var alpha = null;
+var beta = null;
+var gamma = null;
+
+var interval = 10;
+
+var listening = false;    
+
+var reverb = new Tone.JCReverb(0.4).connect(Tone.Master);
+var delay = new Tone.FeedbackDelay(0.5);
+var synth2 =new Tone.DuoSynth().chain(delay, reverb);
+
+var orientationHandler = function(event) {
+	if(gyro == true){
+    alpha = event.alpha
+    beta = event.beta
+    gamma = event.gamma
+    console.log("Tone state: " + Tone.context.state);
+    document.getElementById("status").innerHTML = "Alpha " + event.alpha + " Beta " + event.beta + " Gamma " + event.gamma;
+    if (beta <= -160) {
+        synth2.volume.value = -10
+    } else if (beta <= -140 && beta > -160) {
+        synth2.volume.value = -12;
+    } else if (beta <= -120 && beta > -140) {
+        synth2.volume.value = -14;
+    } else if (beta <= -100 && beta > -120) {
+        synth2.volume.value = -16;
+    } else if (beta <= -80 && beta > -100) {
+        synth2.volume.value = -18;
+    } else if (beta <= -60 && beta > -80) {
+        synth2.volume.value = -20;
+    } else if (beta <= -40 && beta > -60) {
+        synth2.volume.value = -22;
+    } else if (beta <= -20 && beta > -40) {
+        synth2.volume.value = -24;
+    } else if (beta <= 0 && beta > -20) {
+        synth2.volume.value = -26;
+    } else if (beta <= 20 && beta > 0) {
+        synth2.volume.value = -28;
+    } else if (beta <= 40 && beta > 20) {
+        synth2.volume.value = -30;
+    } else if (beta <= 60 && beta > 40) {
+        synth2.volume.value = -28;
+    } else if (beta <= 80 && beta > 60) {
+        synth2.volume.value = -30;
+    } else if (beta <= 100 && beta > 80) {
+        synth2.volume.value = -32;
+    } else if (beta <= 120 && beta > 100) {
+        synth2.volume.value = -34;
+    } else if (beta <= 140 && beta >120) {
+        synth2.volume.value = -36;
+    } else if (beta <= 160 && beta > 140) {
+        synth2.volume.value = -38;
+    } else if (beta > 160) {
+        synth2.volume.value = -40;
+    } else {
+        synth2.volume.value = -42;
+    }
+
+    console.log("synth2.volume.value: " + synth2.volume.value);
+
+    if (gamma <= -70) {
+        synth2.triggerAttackRelease("C1", "64n");
+    } else if (gamma <= -60 && gamma > -70) {
+        synth2.triggerAttackRelease("C2", "64n");
+    } else if (gamma <= -50 && gamma > -60) {
+        synth2.triggerAttackRelease("C3", "64n");
+    } else if (gamma <= -40 && gamma > -50) {
+        synth2.triggerAttackRelease("G3", "64n");
+    } else if (gamma <= -30 && gamma > -40) {
+        synth2.triggerAttackRelease("C4", "64n");
+    } else if (gamma <= -20 && gamma > -30) {
+        synth2.triggerAttackRelease("E4", "64n");
+    } else if (gamma <= -10 && gamma > -20) {
+        synth2.triggerAttackRelease("G4", "64n");
+    } else if (gamma <= 0 && gamma > -10) {
+        synth2.triggerAttackRelease("Bb5", "64n");
+    } else if (gamma <= 10 && gamma > 0) {
+        synth2.triggerAttackRelease("C5", "64n");
+    } else if (gamma <= 20 && gamma > 10) {
+        synth2.triggerAttackRelease("D5", "64n");
+    } else if (gamma <= 30 && gamma > 20) {
+        synth2.triggerAttackRelease("E5", "64n");
+    } else if (gamma <= 40 && gamma > 30) {
+        synth2.triggerAttackRelease("Gb5", "64n");
+    } else if (gamma <= 50 && gamma > 40) {
+        synth2.triggerAttackRelease("G5", "64n");
+    } else if (gamma <= 60 && gamma > 50) {
+        synth2.triggerAttackRelease("A6", "64n");
+    } else if (gamma <= 70 && gamma > 60) {
+        synth2.triggerAttackRelease("Bb6", "64n");
+    } else if (gamma > 70) {
+        synth2.triggerAttackRelease("B6", "64n");
+    } else {
+        synth2.triggerAttackRelease("C6", "64n");
+    }
+	}
+};
+

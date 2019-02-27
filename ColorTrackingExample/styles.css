@@ -6,20 +6,20 @@ body {
 }
 
 #chord{
-	width: 200px; 
+	width: 250px; 
 	height: 80px; 
 	font-size: 20px; 
 	
 }
 #gyro{
-	width: 200px; 
+	width: 250px; 
 	height: 80px; 
 	font-size: 20px; 
 	
 }
 
 #test{
-	width: 200px; 
+	width: 250px; 
 	height: 80px; 
 	font-size: 20px; 
 	
@@ -86,17 +86,29 @@ canvas {
 }
 
 
-@media (max-width: 550px) {
+@media (max-width: 1200px) {
+.ui{width: 400px; }
+
+
+
+#test{
+	width: 400px; 
+	height: 300px; 
+	font-size: 36px; 
+	
+}
+
+	
 	#chord{
-	width: 300px; 
-	height: 200px; 
-	font-size: 100px; 
+	width: 400px; 
+	height: 300px; 
+	font-size: 36px; 
 	
 }
 #gyro{
-	width: 300px; 
-	height: 200px; 
-	font-size: 100px; 
+	width: 400px; 
+	height: 300px; 
+	font-size: 36px; 
 	
 }
 }
