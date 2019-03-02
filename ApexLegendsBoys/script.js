@@ -13,7 +13,8 @@ window.addEventListener("load", function(e) {
 	
 	document.querySelector('#char').addEventListener('mousedown',() => {
 		 var rand = Math.floor(Math.random() * characters.length);
-		 document.getElementById("characters").innerHTML = "Character: " + characters[rand];
+		 document.getElementById("characters").src= "Characters/" + characters[rand] + ".jpg";
+		 //document.getElementById("characters").innerHTML = "Character: " + characters[rand];
 	})
 	
 	document.querySelector('#codyButton').addEventListener('mousedown',() => {
